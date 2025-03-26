@@ -1,0 +1,31 @@
+---
+version: 2
+build:
+  os: "ubuntu-24.04"
+  tools:
+    nodejs: "22"
+    python: "3.13"
+    ruby: "3.3"
+  commands:
+    - 'echo "output directory: ${READTHEDOCS_OUTPUT}html"'
+    # shared-web build
+    - npm install
+    - npm run build
+    - npm pack
+    - mkdir -p ${READTHEDOCS_OUTPUT}html/dist
+    - cp -r dist/* ${READTHEDOCS_OUTPUT}html/dist
+    # jsdoc build
+    - npm run generate-docs
+    # jekyll example build
+    - 'echo "baseurl: projects/shared-web/$READTHEDOCS_VERSION"/jekyll >> ./examples/jekyll/_config.yml'
+    - cd examples/jekyll && npm install
+    - cd examples/jekyll && npm run build
+    # doxygen example build
+    - cd examples/doxygen && npm install
+    - cd examples/doxygen && npm run build
+    # sphinx example build
+    - cd examples/sphinx && npm install
+    - cd examples/sphinx && npm run build
+    - cd examples/sphinx && npm run lint
+    # debug output
+    - cd ${READTHEDOCS_OUTPUT}html && ls -la -R
