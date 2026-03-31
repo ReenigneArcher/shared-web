@@ -17,6 +17,9 @@ updates:
   - package-ecosystem: "docker"
     directories:
       - "/**/*"
+    groups:
+      monorepo-dependencies:
+        group-by: dependency-name
     rebase-strategy: disabled
     schedule:
       interval: "cron"
@@ -91,6 +94,8 @@ updates:
       timezone: "America/New_York"
     open-pull-requests-limit: 10
     groups:
+      monorepo-dependencies:
+        group-by: dependency-name
       pytest-dependencies:
         applies-to: version-updates
         patterns:
