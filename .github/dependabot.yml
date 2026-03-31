@@ -16,9 +16,7 @@ updates:
 
   - package-ecosystem: "docker"
     directories:
-      - "/"
-      - "/**"
-      - "/**/**"
+      - "/**/*"
     rebase-strategy: disabled
     schedule:
       interval: "cron"
@@ -85,9 +83,7 @@ updates:
 
   - package-ecosystem: "pip"
     directories:
-      - "/"
-      - "/**"
-      - "/**/**"  # https://github.com/dependabot/dependabot-core/issues/14569
+      - "/**/*"
     rebase-strategy: disabled
     schedule:
       interval: "cron"
